@@ -1,6 +1,8 @@
 const express = require('express') //Express is a Node.js web application framework
 const app = express(); // Create an Express application
 
+app.use(express.json()); // Use the JSON middleware
+
 const db = require('./models'); // Import the models
 
 //Routers
@@ -12,4 +14,3 @@ db.sequelize.sync().then(() => { // Sync the models
         console.log("Server running on port 3001") // Log a message to the console
     });
 });
- 
