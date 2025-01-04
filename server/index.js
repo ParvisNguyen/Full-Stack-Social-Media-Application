@@ -3,7 +3,9 @@ const app = express(); // Create an Express application
 
 const db = require('./models'); // Import the models
 
-
+//Routers
+const postsRouter = require('./routes/Posts'); // Import the Posts router
+app.use('/posts', postsRouter); // Use the Posts router
 
 db.sequelize.sync().then(() => { // Sync the models
     app.listen(3001, () => { // Listen on port 3001
