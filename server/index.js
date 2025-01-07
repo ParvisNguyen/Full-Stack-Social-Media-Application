@@ -1,7 +1,9 @@
 const express = require('express') //Express is a Node.js web application framework
 const app = express(); // Create an Express application
+const cors = require("cors"); 
 
 app.use(express.json()); // Use the JSON middleware
+app.use(cors()); // Use the CORS middleware
 
 const db = require('./models'); // Import the models
 
