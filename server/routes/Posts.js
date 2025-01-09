@@ -1,11 +1,17 @@
 const express = require('express'); // Import the express module
 const router = express.Router(); // Create a new router
-const { Posts } = require('../models');// Import the Posts model 
+const { Posts } = require('../models'); // Import the Posts model 
 
 router.get("/", async (req, res) => {
     const listOfPosts = await Posts.findAll(); // Get all the posts
     res.json(listOfPosts); // Send the posts as a response
 }); 
+
+router.get('/byId/:id', async (req, res) => {
+    const id = req.params.id; // Get the id from the request
+    const post = await Posts.findByPk(id); // Find the post by id
+    res.json(post); // Send the post as a response
+});
 
 router.post("/", async (req, res) => {
     const post = req.body; // Get the post from the request
@@ -13,4 +19,4 @@ router.post("/", async (req, res) => {
     res.json(post); // Send the post as a response
 });
 
-module.exports = router; // Export the router 
+module.exports = router; // Export the router
