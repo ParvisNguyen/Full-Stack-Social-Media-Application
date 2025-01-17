@@ -21,11 +21,22 @@ function Post() {
         axios.post("http://localhost:3001/comments", {
             commentBody: newComment,
             PostId: id
-        })
+        },
+            {
+                headers: {
+                    acessToken: sessionStorage.getItem("accessToken")
+                }
+
+            }
+        )
             .then((response) => {
-                const commentToAdd = { commentBody: newComment };
-                setComments([...comments, commentToAdd]);
-                setNewComment("");
+                if (response.data.error) {
+                    alert("You are not logged in");
+                } else {
+                    const commentToAdd = { commentBody: newComment };
+                    setComments([...comments, commentToAdd]);
+                    setNewComment("");
+                }
             });
     };
 
@@ -43,7 +54,7 @@ function Post() {
                     <input type="text"
                         placeholder="Your Comment Here"
                         autoComplete="off"
-                        value = {newComment}
+                        value={newComment}
                         onChange={(event) => {
                             setNewComment(event.target.value)
                         }}
